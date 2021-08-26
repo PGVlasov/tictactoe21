@@ -3,7 +3,7 @@ module.exports = {
     "mongodb+srv://PGVlasov:pYysGR4QudCqufWH@cluster0.qjjvx.mongodb.net/tictactoe2021",
   SESION_SECRET: "some secret value",
   SENDGRID_API_KEY:
-    "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",
+    "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",
   EMAIL_FROM: "pvlasov@yandex.ru",
   BASE_URL: "http://localhost:3000",
 };
