@@ -8,7 +8,7 @@ mongoose.set("useFindAndModify", false);
 router.post("/", async (req, res) => {
   const id = req.body.userId;
   console.log("EDIT USER", id);
-  await User.findByIdAndUpdate(id, req.body);
+  // await User.findOneAndUpdate(id, req.body);
 });
 
 module.exports = router;
