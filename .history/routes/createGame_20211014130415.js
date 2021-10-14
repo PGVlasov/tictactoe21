@@ -3,7 +3,9 @@ const createGame = require("../models/createGame");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const game = await new createGame({
+  console.log("somthing");
+  console.log("SAVE TO BD", req.body);
+  const game = new createGame({
     creator: req.body.creator,
     url: req.body.title,
     cliced: req.body.cliced,
@@ -16,21 +18,27 @@ router.post("/", async (req, res) => {
 });
 
 router.post("/delete", async (req, res) => {
+  console.log("DELETE", req.body);
+  const game = await createGame.findByIdAndDelete(req.body.id);
+  console.log("DELETE", game);
   try {
-    const game = await createGame.findByIdAndDelete(req.body.id);
+    await game.save();
   } catch (e) {
     console.log(e);
   }
 });
 
 router.post("/cliced", async (req, res) => {
+  console.log("somthing");
   iD = req.body.id;
   //   console.log("GAME ID:", req.body.id);
+  console.log("CLICED FROM CLAENT", req.body.cliced);
+  const game = await createGame.findByIdAndUpdate(iD, req.body);
+  console.log("Changed Game", game);
+  //   );
+  // const game = await createGame.findOne({"http://localhost:3000/game/:17c6adc67a1"});
+  // console.log("Changed Game", game);
   try {
-    console.log("CLICED FROM CLAENT", req.body.cliced);
-    const game = await createGame.findByIdAndUpdate(iD, req.body);
-    console.log("Changed Game", game);
-
     await game.save();
   } catch (e) {
     console.log(e);
@@ -38,12 +46,9 @@ router.post("/cliced", async (req, res) => {
 });
 
 router.get("/", async (req, res, next) => {
-  try {
-    const games = await createGame.find();
-    res.send(games);
-  } catch (e) {
-    console.log(e);
-  }
+  const games = await createGame.find();
+  console.log(games);
+  res.send(games);
 });
 
 module.exports = router;

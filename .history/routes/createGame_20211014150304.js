@@ -3,7 +3,9 @@ const createGame = require("../models/createGame");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const game = await new createGame({
+  console.log("somthing");
+  console.log("SAVE TO BD", req.body);
+  const game = new createGame({
     creator: req.body.creator,
     url: req.body.title,
     cliced: req.body.cliced,

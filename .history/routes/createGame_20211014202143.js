@@ -37,13 +37,4 @@ router.post("/cliced", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
-  try {
-    const games = await createGame.find();
-    res.send(games);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
 module.exports = router;
