@@ -9,10 +9,34 @@ mongoose.set("useFindAndModify", false);
 
 router.post("/users", async (req, res, next) => {
   //console.log("ID FROM CLIENT", req.body);
-  const user = await User.findById(req.body.userId);
-  res.send([user]);
+  try {
+    const user = await User.findById(req.body.userId);
+    res.send([user]);
+    console.log([user]);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
-router.get("/", async (req, res, next) => {});
+router.post("/gameparticipants", async (req, res, next) => {
+  //console.log("ID FROM CLIENT", req.body);
+  try {
+    const user = await User.findById(req.body.userId);
+    res.send([user]);
+    console.log([user]);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.get("/rating", async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.send(users);
+    console.log(users);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 module.exports = router;

@@ -25,16 +25,38 @@ router.post("/delete", async (req, res) => {
 
 router.post("/cliced", async (req, res) => {
   iD = req.body.id;
-  //   console.log("GAME ID:", req.body.id);
   try {
-    console.log("CLICED FROM CLAENT", req.body.cliced);
-    const game = await createGame.findByIdAndUpdate(iD, req.body);
-    console.log("Changed Game", game);
-
-    await game.save();
+    //   const game1 = await createGame.findByIdAndUpdate(iD, req.body);
+    //   await game1.save();
+    const game = await createGame.findById(iD);
+    const newClicked = game.cliced + req.body.cliced;
+    console.log("game cliced", game.cliced);
+    console.log("newClicked", newClicked);
+    if (newClicked < 2) {
+      const game = await createGame.findByIdAndUpdate(iD, {
+        cliced: newClicked,
+      });
+      await game.save();
+    } else {
+      const game = await createGame.findByIdAndDelete(req.body.id);
+    }
   } catch (e) {
     console.log(e);
   }
+  //   console.log("GAME ID:", req.body.id);
+  //   try {
+  //     console.log("CLICED FROM CLAENT", req.body.cliced);
+  //     if (req.body.cliced < 2) {
+  //       const game = await createGame.findByIdAndUpdate(iD, req.body);
+  //       console.log("Changed Game", game);
+
+  //       await game.save();
+  //     } else {
+  //       const game = await createGame.findByIdAndDelete(req.body.id);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
 });
 
 router.get("/", async (req, res, next) => {
