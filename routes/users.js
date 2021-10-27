@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
 router.post("/users", async (req, res, next) => {
-  //console.log("ID FROM CLIENT", req.body);
   try {
     const user = await User.findById(req.body.userId);
     res.send([user]);
@@ -34,6 +33,17 @@ router.get("/rating", async (req, res, next) => {
     const users = await User.find();
     res.send(users);
     console.log(users);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post("/delete", async (req, res) => {
+  try {
+    console.log("delete user", req.body);
+    const user = await User.findByIdAndDelete(req.body.id);
+    //  const user = await User.findById(req.body.userId);
+    // console.log("USER TO DELETE", user);
   } catch (e) {
     console.log(e);
   }

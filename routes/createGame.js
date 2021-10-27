@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
 
 router.post("/delete", async (req, res) => {
   try {
+    console.log("DELETE GAME", req.body);
     const game = await createGame.findByIdAndDelete(req.body.id);
   } catch (e) {
     console.log(e);
