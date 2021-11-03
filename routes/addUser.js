@@ -3,9 +3,9 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const sendgreed = require("nodemailer-sendgrid-transport");
 const User = require("../models/user");
-// const session = require("express-session");
 const keys = require("../keys/index");
 const regEmail = require("../emails/registration");
+const reRegEmail = require("../emails/reRegistration");
 const router = express.Router();
 
 const transporter = nodemailer.createTransport(
@@ -20,9 +20,11 @@ router.post("/", async (req, res, next) => {
     const candidate = await User.findOne({ email });
 
     if (candidate) {
-      return console.error("такой пользователь уже существует");
-
-      //todo send email
+      try {
+        await transporter.sendMail(reRegEmail(email));
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       const hadhPassword = await bcrypt.hash(req.body.password, 10);
       const user = new User({
@@ -32,7 +34,6 @@ router.post("/", async (req, res, next) => {
         age: req.body.age,
         adress: req.body.adress,
       });
-      //console.log(email);
       try {
         await user.save();
         await transporter.sendMail(regEmail(email));

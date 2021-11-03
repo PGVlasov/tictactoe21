@@ -102,18 +102,3 @@ function onListening() {
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
-
-// const webSocketServer = new WebSocket.Server({ server });
-// webSocketServer.on("connection", (webSocket) => {
-//   console.info("Total connected clients:", webSocketServer.clients.size);
-
-//   app.locals.clients = webSocketServer.clients;
-// });
-
-// app.ws("/", (ws, req) => {
-//   console.log("подключение установлено!");
-//   ws.send("ты подключен");
-//   ws.on("message", (msg) => {
-//     console.log(msg);
-//   });
-// });

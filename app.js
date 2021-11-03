@@ -8,7 +8,6 @@ const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const addUserRouter = require("./routes/addUser");
 const editUserRouter = require("./routes/editUsers");
 const authRouter = require("./routes/auth");
 const logoutRouter = require("./routes/logout");
@@ -32,8 +31,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
 app.use(logger("dev"));
-// app.use(bodyParser.json({limit: "50mb"}));
-// app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,7 +51,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/", indexRouter);
 app.use("/createGame", createGameRouter);
 app.use("/users", usersRouter);
-app.use("/addUser", addUserRouter);
 app.use("/editUsers", editUserRouter);
 app.use("/auth", authRouter);
 app.use("/logout", logoutRouter);
@@ -75,13 +71,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-// app.ws("/", (ws, req) => {
-//   console.log("подключение установлено!");
-//   ws.send("ты подключен");
-//   ws.on("message", (msg) => {
-//     console.log(msg);
-//   });
-// });
 
 module.exports = app;

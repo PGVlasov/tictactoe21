@@ -22,16 +22,11 @@ router.get("/", async (req, res, next) => {
 // });
 
 router.post("/", async (req, res) => {
-  console.log("FILE", req.file);
-  console.log("ID", req.body);
-
   let data = JSON.parse(req.body.userId);
-  console.log("DATA", data);
   res.sendStatus(200);
 
   try {
     const user = await User.findById(data);
-    //const user = await User.findById(req.body.userId);
     if (req.file) {
       user.avatarUrl = req.file.path;
     }
