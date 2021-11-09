@@ -8,6 +8,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const addUserRouter = require("./routes/addUser");
 const editUserRouter = require("./routes/editUsers");
 const authRouter = require("./routes/auth");
 const logoutRouter = require("./routes/logout");
@@ -53,6 +54,7 @@ app.use("/createGame", createGameRouter);
 app.use("/users", usersRouter);
 app.use("/editUsers", editUserRouter);
 app.use("/auth", authRouter);
+app.use("/addUser", addUserRouter);
 app.use("/logout", logoutRouter);
 app.use("/avatar", avatarRouter);
 
