@@ -9,11 +9,11 @@ const mongoose = require("mongoose");
 
 mongoose.set("useFindAndModify", false);
 
-router.get("/", async (req, res, next) => {
-  const user = await User.find();
+// router.get("/", async (req, res, next) => {
+//   const user = await User.find();
 
-  // res.send(user);
-});
+//   // res.send(user);
+// });
 
 // router.post("/", filemiddeware.single("image"), function (req, res, next) {
 //   // req.file is the `avatar` file
